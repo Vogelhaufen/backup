@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Inspired by mariuszkurek/convert.sh
-
-
 #no. no manjaro. manjaro bad. convert fast. right now.
 CONVERTER_MANJARNO(){
 ## System-wide jobs. The core part, this breaks and you system gets borked.
@@ -309,3 +306,83 @@ fi
 
 # Sometimes the script gives out a non-0 exit code even when there are no errors.
 [ $? != 0 ] && exit 0;
+
+###### AFTERMATH ####
+# Some steps redundant, just to make sure #
+
+# 1. Remove leftover Manjaro packages and dependencies
+
+# Run a deep check for installed packages that have manjaro or other Manjaro-specific names:
+# pacman -Qq | grep manjaro
+
+# If any show up, remove them explicitly:
+# sudo pacman -Rns package_name
+
+# Or automate:
+# pacman -Qq | grep manjaro | xargs sudo pacman -Rns --noconfirm
+
+# Check also for packages related to Manjaro tools like pamac, manjaro-settings-manager, manjaro-kernels, manjaro-hello, etc.
+
+# 2. Remove Manjaro repositories from pacman.conf
+
+# Make sure /etc/pacman.conf does not have any [manjaro] or other custom Manjaro repo sections. Leave only the official Arch repos, like [core], [extra], [community], [multilib].
+
+# 3. Clean up orphaned packages
+
+# WARNING: only remove packages if you what you're doing - otherwise skip this step
+# Orphans are packages installed as dependencies but no longer required by any installed package:
+# sudo pacman -Rns $(pacman -Qtdq)
+# WARNING: only remove packages if you what you're doing - otherwise skip this step
+
+# 4. Clean the mirrorlist
+
+# Make sure your mirrorlist (/etc/pacman.d/mirrorlist) is from Arch Linux, not Manjaro. You can regenerate it with:
+# sudo curl -o /etc/pacman.d/mirrorlist https://archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6
+# sudo sed -i '/^#Server/ s/^#//' /etc/pacman.d/mirrorlist
+
+# 5. Remove Manjaro-specific configs
+
+# Check for leftover config files or directories:
+# /etc/manjaro-release
+# /etc/lsb-release (should be Arch’s version)
+# /etc/pacman-mirrors/
+# /usr/share/manjaro/
+# Any Manjaro branding in /etc/os-release or /etc/issue
+
+# You can manually delete those or replace them with Arch equivalents.
+
+# 6. Reinstall or update key packages
+
+# Force reinstall essential Arch packages to overwrite any Manjaro-modified files:
+# sudo pacman -Syu --overwrite '*' pacman linux linux-headers grub
+# (Replace linux with linux-lts if you prefer.)
+
+# 7. Update initramfs and bootloader
+
+# After kernel or bootloader changes:
+# sudo mkinitcpio -P
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# 8. Clean user configs
+
+# Some desktop environments or applications may have Manjaro-specific themes or settings in your home directory:
+# ~/.config/ — Look for manjaro or pamac folders and delete if unwanted.
+# ~/.cache/ — Clear caches.
+# Reset or reinstall your desktop environment themes if they look broken.
+
+# 9. Optional: Purge leftover Manjaro services
+
+# Check for any Manjaro-specific systemd units:
+# systemctl list-unit-files | grep manjaro
+# Disable or remove them if found.
+
+# 10. Remove Manjaro Dev Keys and replace them with Arch
+
+# rm -rf /etc/pacman.d/gnupg/
+# pacman-key --init
+# pacman-key --populate archlinux
+
+# 11. Final system upgrade
+
+# Finally, do a full system upgrade to sync everything with Arch repos:
+# sudo pacman -Syu
