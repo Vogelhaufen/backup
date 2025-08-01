@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-#no. no manjaro. manjaro bad. convert fast. right now.
+# no. no manjaro. manjaro bad. convert fast. right now.
+# https://manjarno.pages.dev/
 CONVERTER_MANJARNO(){
 ## System-wide jobs. The core part, this breaks and you system gets borked.
 ## If you use doas instead of sudo, then simply change the sudo to doas.
