@@ -387,3 +387,6 @@ fi
 
 # Finally, do a full system upgrade to sync everything with Arch repos:
 # sudo pacman -Syu
+
+# 12. I also removed the Manjaro bootimages but the fun ends here. go figure <3
+
