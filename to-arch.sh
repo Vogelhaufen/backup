@@ -308,7 +308,7 @@ fi
 [ $? != 0 ] && exit 0;
 
 ###### AFTERMATH ####
-# Some steps redundant, just to make sure #
+# Some are steps redundant, just to make sure #
 
 # 1. Remove leftover Manjaro packages and dependencies
 
