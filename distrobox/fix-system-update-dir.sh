@@ -1,4 +1,5 @@
 #!/bin/bash
+#@REBOOT cronjob
 #/usr/local/bin/fix-system-update-dir.sh
 
   #sleep 2
