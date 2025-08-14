@@ -1,5 +1,6 @@
 #!/bin/bash
 # Clean and create a temporary /system-update mount to satisfy distrobox
+# Fix: symlink will point to /tmp on boot which doesnt break the boot sequence
 # /usr/local/bin/mount-system-update.sh
 # 1. If /system-update is a symlink, resolve the real path
 if [ -L /system-update ]; then
