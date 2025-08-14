@@ -14,7 +14,7 @@ fi
 # ~/.zshrc inside container
 
 
-# Change Container prompt to make sure we have a different Prompt
+# Change Container Prompt
 if [ "$CONTAINER_PROMPT" = "fedora" ]; then
     # sim hostname
     hostname() { echo "fedora-gaming"; }
