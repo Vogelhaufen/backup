@@ -1,6 +1,6 @@
 #!/bin/bash
 # Clean and create a temporary /system-update mount to satisfy distrobox
-# /usr/local/bin/fix-system-update-dir.sh
+# /usr/local/bin/mount-system-update.sh
 # 1. If /system-update is a symlink, resolve the real path
 if [ -L /system-update ]; then
     REAL_PATH=$(readlink -f /system-update)
