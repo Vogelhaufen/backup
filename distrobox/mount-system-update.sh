@@ -2,24 +2,15 @@
 # Clean and create a temporary /system-update mount to satisfy distrobox
 # Fix: symlink will point to /tmp on boot which doesnt break the boot sequence since the target does not exist
 # /usr/local/bin/mount-system-update.sh
-# 1. If /system-update is a symlink, resolve the real path
-if [ -L /system-update ]; then
-    REAL_PATH=$(readlink -f /system-update)
-    # Unmount if mounted
-    if mountpoint -q "$REAL_PATH"; then
-        sudo umount "$REAL_PATH"
-    fi
-    sudo rm -f /system-update
-fi
 
-# 2. If /system-update is a mountpoint, unmount it
-if mountpoint -q /system-update; then
-    sudo umount /system-update
-fi
+# Clean and create a temporary /system-update mount
 
-# 3. If the directory still exists, remove it
-if [ -d /system-update ]; then
-    sudo rm -rf /system-update
+# Force remove any existing /system-update first
+sudo rm -rf /system-update
+
+# Ensure /tmp/wurst exists
+if [ ! -d /tmp/wurst ]; then
+    mkdir -p /tmp/wurst
 fi
 
 # 4. Find and unmount any tmpfs mounts under /tmp that may have been left behind
