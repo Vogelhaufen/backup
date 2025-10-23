@@ -6,7 +6,10 @@
 
 ## 1. Enable sshd
 
-Enable `sshd` in case the system boots to a black screen. This will let you recover if the graphical interface fails.
+Enable sshd in case the system boots to a black screen. This will let you recover if the graphical interface fails.
+
+sudo systemctl enable ssh
+sudo systemctl start ssh
 
 ---
 
@@ -14,33 +17,41 @@ Enable `sshd` in case the system boots to a black screen. This will let you reco
 
 Download the manual driver package from NVIDIA:
 
-[NVIDIA Driver 570](https://www.nvidia.com/de-de/drivers/details/254657/)
+https://www.nvidia.com/de-de/drivers/details/254657/
 
 ---
 
-## 3. Install Driver Manually
+## 3. Uninstall Existing NVIDIA Driver (Optional but Recommended)
 
-chmod +x NVIDIA-Linux-*.run  
+Before installing the new driver, uninstall any existing NVIDIA driver:
+
+sudo ./NVIDIA-Linux-*.run --uninstall
+
+---
+
+## 4. Install Driver Manually
+
+chmod +x NVIDIA-Linux-*.run
 sudo ./NVIDIA-Linux-*.run
 
-> The installer may fail to load `nvidia-drm` at the end. This is expected.
+> The installer may fail to load nvidia-drm at the end. This is expected.
 
 ---
 
-## 4. Build and Install DKMS Module
+## 5. Build and Install DKMS Module
 
-sudo dkms build nvidia -v 570.195.03  
+sudo dkms build nvidia -v 570.195.03
 sudo dkms install nvidia -v 570.195.03
 
 ---
 
-## 5. Reboot
+## 6. Reboot
 
 sudo reboot
 
 ---
 
-## 6. Verify Installation
+## 7. Verify Installation
 
 After reboot, check that the driver is active:
 
