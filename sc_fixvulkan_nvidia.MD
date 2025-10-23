@@ -29,7 +29,7 @@ sudo ./NVIDIA-Linux-*.run
 
 ## 4. Build and Install DKMS Module
 
-sudo dkms build nvidia -v 570.195.03
+sudo dkms build nvidia -v 570.195.03  
 sudo dkms install nvidia -v 570.195.03
 
 ---
