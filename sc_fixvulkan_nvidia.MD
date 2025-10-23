@@ -8,8 +8,6 @@
 
 Enable sshd in case the system boots to a black screen. This will let you recover if the graphical interface fails.
 
-sudo systemctl enable ssh
-sudo systemctl start ssh
 
 ---
 
