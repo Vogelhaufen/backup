@@ -31,7 +31,7 @@ sudo ./NVIDIA-Linux-*.run --uninstall
 
 ## 4. Install Driver Manually
 
-chmod +x NVIDIA-Linux-*.run
+chmod +x NVIDIA-Linux-*.run  
 sudo ./NVIDIA-Linux-*.run
 
 > The installer may fail to load nvidia-drm at the end. This is expected.
@@ -40,7 +40,7 @@ sudo ./NVIDIA-Linux-*.run
 
 ## 5. Build and Install DKMS Module
 
-sudo dkms build nvidia -v 570.195.03
+sudo dkms build nvidia -v 570.195.03  
 sudo dkms install nvidia -v 570.195.03
 
 ---
