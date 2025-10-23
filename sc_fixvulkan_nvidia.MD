@@ -20,7 +20,7 @@ Download the manual driver package from NVIDIA:
 
 ## 3. Install Driver Manually
 
-chmod +x NVIDIA-Linux-*.run
+chmod +x NVIDIA-Linux-*.run  
 sudo ./NVIDIA-Linux-*.run
 
 > The installer may fail to load `nvidia-drm` at the end. This is expected.
