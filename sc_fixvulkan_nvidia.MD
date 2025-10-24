@@ -1,12 +1,12 @@
 # Star Citizen Linux Driver Guide
 
 **Issue:** Star Citizen VULKAN does not work with NVIDIA driver version 580 for a lot of users. Use version 570.195.03 instead - works with Kerne 6.17+.
-It is not recommended to tinker with this stuff. Always use repo drivers if you can.  
 
-SC VULKAN doesn't work without installing custom drivers. You have been warned.
+This guide is not for beginners. It involves manually installing and managing NVIDIA drivers outside your package manager, which can easily break your system or render it unbootable.
+Only proceed if you understand how to recover from a failed driver installation, use TTY or SSH to restore a broken system, and have a full backup ready, e.g. via Timeshift/disk image.
 
-# => USE.A.BACKUP.SYSTEM <=, e.g. Timeshift
-
+If you don’t know what DKMS, runlevel, or kernel headers are — stop here.
+Use your distro’s official repository drivers instead.
 ---
 
 ## 1. Enable sshd
