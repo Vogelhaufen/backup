@@ -1,6 +1,6 @@
 # Star Citizen Linux Driver Guide
 
-**Issue:** Star Citizen VULKAN does not work with NVIDIA driver version 580 for a lot of users. Use version 570.195.03 instead - works with Kernel 6.17+. Former 570.169 is deprecated due to changes in both Kernel and NVIDIA driver and does not build anymore.
+**Issue:** Star Citizen VULKAN does not work with NVIDIA driver version 580 for a lot of users. Use version 570.195.03 instead - works with Kernel 6.17+. Former 570.169 is deprecated due to changes in both Kernel and NVIDIA driver and does not build anymore without custom patches.
 
 This guide is not for beginners. It involves manually installing and managing NVIDIA drivers outside your package manager, which can easily break your system or render it unbootable.
 Only proceed if you understand how to recover from a failed driver installation, use TTY or SSH to restore a broken system, and have a full backup ready, e.g. via Timeshift/disk image.
