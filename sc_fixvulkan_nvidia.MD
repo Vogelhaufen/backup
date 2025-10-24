@@ -5,7 +5,7 @@ It is not recommended to tinker with this stuff. Always use repo drivers if you 
 
 SC VULKAN doesn't work without installing custom drivers. You have been warned.
 
-#=> USE.A.BACKUP.SYSTEM <=, e.g. Timeshift
+# => USE.A.BACKUP.SYSTEM <=, e.g. Timeshift
 
 ---
 
