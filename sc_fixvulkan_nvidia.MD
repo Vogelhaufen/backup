@@ -61,3 +61,9 @@ After reboot, check that the driver is active:
 nvidia-smi
 
 Star Citizen should now work correctly with driver version 570.
+
+## 8. Blacklist/pin nvidia packages
+my /etc/pacman.conf:
+
+#IgnorePkg   = nvidia-utils libxnvctrl nvidia-settings nvidia lib32-nvidia-utils opencl-nvidia
+
