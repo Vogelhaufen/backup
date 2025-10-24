@@ -62,8 +62,8 @@ nvidia-smi
 
 Star Citizen should now work correctly with driver version 570.
 
-## 8. Blacklist/pin nvidia packages
+## 8. Blacklist/Pin NVIDIA Packages
 my /etc/pacman.conf:
 
-#IgnorePkg   = nvidia-utils libxnvctrl nvidia-settings nvidia lib32-nvidia-utils opencl-nvidia nvidia-dkms
+IgnorePkg   = nvidia-utils libxnvctrl nvidia-settings nvidia lib32-nvidia-utils opencl-nvidia nvidia-dkms
 
