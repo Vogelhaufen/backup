@@ -1,6 +1,6 @@
 # Star Citizen Linux Driver Guide
 
-**Issue:** Star Citizen VULKAN does not work with NVIDIA driver version 580 for a lot of users. Use version 570 instead.  
+**Issue:** Star Citizen VULKAN does not work with NVIDIA driver version 580 for a lot of users. Use version 570.195.03 instead - works with Kerne 6.17+.
 It is not recommended to tinker with this stuff. Always use repo drivers if you can.  
 
 SC VULKAN doesn't work without installing custom drivers. You have been warned.
