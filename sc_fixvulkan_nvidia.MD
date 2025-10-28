@@ -6,7 +6,7 @@ This guide is not for beginners. It involves manually installing and managing NV
 Only proceed if you understand how to recover from a failed driver installation, use TTY or SSH to restore a broken system, and have a full backup ready, e.g. via Timeshift/disk image.
 
 If you don’t know what DKMS, runlevel, or kernel headers are — stop here.
-Use your distro’s official repository drivers instead.
+Use your distro’s official repository drivers instead. This document is not holding hands.
 ---
 
 ## 1. Enable sshd
