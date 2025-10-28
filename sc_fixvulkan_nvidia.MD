@@ -47,6 +47,12 @@ sudo dkms build nvidia -v 570.195.03 --force
 sudo dkms install nvidia -v 570.195.03 --force
 
 ---
+##5.1 Rebuild Initramfs
+
+(arch)
+mkinitcpio -P
+
+---
 
 ## 6. Reboot
 
