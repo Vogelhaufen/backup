@@ -14,4 +14,5 @@ emerge --ask \
   dev-lang/python dev-lang/perl dev-lang/ruby \
   x11-apps/xrandr x11-apps/xev x11-misc/xclip \
   media-libs/libpng media-libs/freetype \
-  app-portage/gentoolkit
+  app-portage/gentoolkit sys-process/cronie \
+
