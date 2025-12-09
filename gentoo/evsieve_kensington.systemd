@@ -1,0 +1,12 @@
+[Unit]
+Description=Evsieve remapping for Kensington Expert Wireless Trackball
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/evsieve --input /dev/input/by-id/usb-Kensington_Expert_Wireless_TB-event-mouse grab persist=reopen --map btn:right btn:left --map btn:side btn:right --map btn:middle btn:side --output name="Fast Trackball"
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
