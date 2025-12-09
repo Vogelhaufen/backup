@@ -1,11 +1,8 @@
 PulseAudio
 
-Öffne /etc/security/limits.conf oder /etc/security/limits.d/audio.conf und füge hinzu:
+open /etc/security/limits.conf or /etc/security/limits.d/audio.conf + add:
 
 @audio   -  rtprio     95
 @audio   -  memlock    unlimited
 
-
-Füge deinen Benutzer zur audio-Gruppe hinzu:
-
-sudo gpasswd -a <dein-benutzername> audio
+sudo gpasswd -a <username> audio
