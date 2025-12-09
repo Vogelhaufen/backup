@@ -1,0 +1,16 @@
+[Unit]
+Description=Set PCM Capture Source on Sound BlasterX G6
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'sleep 120 && /home/hans/g6fix.sh'
+Type=oneshot
+User=hans
+Group=hans
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+WorkingDirectory=/home/hans
+StandardOutput=append:/home/hans/.log/setmic2.log
+StandardError=append:/home/hans/.log/setmic2.log
+
+[Install]
+WantedBy=default.target
