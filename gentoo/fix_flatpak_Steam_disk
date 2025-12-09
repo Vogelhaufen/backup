@@ -1,0 +1,4 @@
+# add ssd outside of flatpak directory
+flatpak override --user com.valvesoftware.Steam --filesystem=/mnt/m2games
+
+flatpak run com.valvesoftware.Steam
