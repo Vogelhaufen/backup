@@ -1,1 +1,2 @@
-wheel floppy audio cdrom video render usb input users vboxusers 
+#dont use audio it destroys RT scheduling => lags
+wheel floppy pipewire cdrom video render usb input users vboxusers 
