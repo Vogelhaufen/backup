@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock screen on mouse idle
+
+[Service]
+Type=simple
+ExecStart=/home/hans/screenlock.sh
+Restart=always
+RestartSec=5s
+# Optional: Stelle sicher, dass es im Benutzerkontext läuft
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/USERNAME/.Xauthority
+
+[Install]
+WantedBy=default.target
