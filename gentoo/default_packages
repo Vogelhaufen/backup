@@ -16,5 +16,4 @@ emerge --ask \
   media-libs/libpng media-libs/freetype \
   app-portage/gentoolkit sys-process/cronie \
   app-misc/wayland-utils app-arch/unrar \
-
-
+  app-portage/eix
