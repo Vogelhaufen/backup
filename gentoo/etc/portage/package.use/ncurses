@@ -1,0 +1,101 @@
+sys-libs/ncurses -gpm
+# required by dev-libs/qcoro-0.12.0::gentoo
+# required by kde-apps/kio-extras-25.08.3::gentoo
+# required by @__auto_slot_operator_replace_installed__ (argument)
+=dev-qt/qtdeclarative-6.9.3-r1 -vulkan -opengl
+# required by dev-qt/qtdeclarative-6.9.3-r1::gentoo
+# required by kde-frameworks/kcoreaddons-6.20.0::gentoo
+# required by kde-frameworks/kfilemetadata-6.20.0::gentoo
+# required by kde-frameworks/baloo-6.20.0::gentoo
+# required by kde-apps/baloo-widgets-25.08.3::gentoo
+# required by kde-apps/dolphin-25.08.3::gentoo[semantic-desktop]
+# required by @selected
+# required by @world (argument)
+=dev-qt/qtbase-6.9.3 -vulkan -opengl
+# required by dev-qt/qtwayland-6.9.3::gentoo
+# required by kde-plasma/spectacle-6.5.3::gentoo
+# required by kde-plasma/plasma-meta-6.5.3::gentoo
+# required by kde-plasma/plasma-meta (argument)
+=dev-qt/qtbase-6.9.3 vulkan opengl
+# required by dev-libs/glib-2.84.4::gentoo
+# required by kde-frameworks/networkmanager-qt-6.20.0::gentoo
+# required by kde-plasma/ksystemstats-6.5.3::gentoo[networkmanager]
+# required by kde-plasma/plasma-systemmonitor-6.5.3::gentoo
+# required by kde-plasma/plasma-meta-6.5.3::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-libs/libpcre2-10.47 abi_x86_32
+# required by x11-libs/cairo-1.18.4-r1::gentoo
+# required by media-video/ffmpeg-7.1.3::gentoo[svg]
+# required by media-sound/sox-14.6.0.4::gentoo[ffmpeg]
+# required by app-accessibility/espeak-ng-1.52.0::gentoo[sound]
+# required by app-accessibility/speech-dispatcher-0.12.1::gentoo[espeak]
+# required by dev-qt/qtspeech-6.10.1::gentoo[speechd]
+# required by kde-frameworks/ktexteditor-6.20.0::gentoo
+# required by kde-apps/kate-lib-25.08.3::gentoo
+# required by kde-apps/kate-addons-25.08.3::gentoo
+# required by kde-apps/kate-25.08.3::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/libpng-1.6.53 abi_x86_32
+# required by media-libs/freetype-2.14.1-r1::gentoo[harfbuzz]
+# required by app-text/mupdf-1.26.3::gentoo
+# required by net-print/libcupsfilters-2.1.1::gentoo[pdf]
+# required by net-print/libppd-2.1.1::gentoo
+# required by net-print/cups-filters-2.0.1::gentoo
+# required by net-print/cups-browsed-2.1.1-r1::gentoo
+# required by net-print/cups-meta-1::gentoo[browsed]
+# required by kde-plasma/plasma-meta-6.5.3::gentoo[cups]
+# required by @selected
+# required by @world (argument)
+>=media-libs/harfbuzz-12.2.0 abi_x86_32
+# required by llvm-core/clang-20.1.8::gentoo
+# required by llvm-runtimes/compiler-rt-20.1.8-r1::gentoo
+# required by llvm-runtimes/compiler-rt-sanitizers-20.1.8-r1::gentoo
+# required by llvm-runtimes/clang-runtime-20.1.8-r1::gentoo[compiler-rt,sanitize]
+>=dev-libs/libxml2-2.15.1 abi_x86_32
+# required by virtual/libudev-251-r2::gentoo
+# required by kde-frameworks/solid-6.20.0::gentoo
+# required by kde-frameworks/baloo-6.20.0::gentoo
+# required by kde-apps/baloo-widgets-25.08.3::gentoo
+# required by kde-apps/dolphin-25.08.3::gentoo[semantic-desktop]
+# required by @selected
+# required by @world (argument)
+>=sys-apps/systemd-258.2 abi_x86_32
+# required by virtual/libelf-3-r1::gentoo
+# required by media-libs/mesa-25.3.1::gentoo
+# required by media-libs/gst-plugins-base-1.24.11-r1::gentoo
+# required by gui-libs/gtk-4.20.3-r2::gentoo[gstreamer]
+# required by gui-libs/libadwaita-1.8.2::gentoo
+# required by gnome-extra/zenity-4.0.5::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-libs/elfutils-0.194 abi_x86_32
+# required by dev-qt/qtdeclarative-6.9.3-r1::gentoo
+# required by dev-qt/qtdeclarative (argument)
+=dev-qt/qtbase-6.9.3 -vulkan -opengl
+# required by kde-plasma/kwayland-6.5.3::gentoo
+# required by kde-plasma/kwin-6.5.3::gentoo
+# required by kde-plasma/plasma-workspace-6.5.3::gentoo
+# required by @__auto_slot_operator_replace_installed__ (argument)
+=dev-qt/qtbase-6.9.3 opengl
+# required by kde-plasma/kwin-x11-6.5.3::gentoo
+# required by @__auto_slot_operator_replace_installed__ (argument)
+=dev-qt/qtdeclarative-6.9.3-r1 opengl
+# required by dev-qt/qtwayland-6.9.3::gentoo
+# required by @selected
+# required by @world (argument)
+=dev-qt/qtbase-6.9.3 vulkan
+# required by dev-qt/qttools-6.9.3::gentoo
+# required by dev-qt/qttranslations-6.9.3::gentoo
+# required by dev-qt/qtbase-6.9.3::gentoo[nls]
+# required by dev-qt/qtwayland-6.9.3::gentoo
+# required by @selected
+# required by @world (argument)
+=dev-qt/qtdeclarative-6.9.3-r1 vulkan
+# required by x11-libs/xapp-2.8.13::gentoo
+# required by xapp (argument)
+>=dev-libs/libdbusmenu-16.04.0-r4 gtk3
+# required by app-admin/opensnitch-1.6.7::pentoo
+# required by app-admin/opensnitch (argument)
+>=dev-python/pyqt5-5.15.11 sql
