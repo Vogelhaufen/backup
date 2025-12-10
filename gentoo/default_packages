@@ -15,5 +15,6 @@ emerge --ask \
   x11-apps/xrandr x11-apps/xev x11-misc/xclip \
   media-libs/libpng media-libs/freetype \
   app-portage/gentoolkit sys-process/cronie \
-  app-misc/wayland-utils
+  app-misc/wayland-utils app-arch/unrar \
+
 
