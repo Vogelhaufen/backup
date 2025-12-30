@@ -1,3 +1,4 @@
+# grub-mkconfig -o /boot/grub/grub.cfg
 GRUB_DISTRIBUTOR="Gentoo"
 GRUB_DISABLE_SUBMENU=y
 GRUB_DEFAULT="Gentoo GNU/Linux, with Linux 6.18.2-cachyos"
