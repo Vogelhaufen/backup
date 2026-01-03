@@ -2,6 +2,7 @@
 sys-kernel/*::CachyOS-kernels
 app-admin/ananicy-cpp::CachyOS-kernels
 virtual/linux-sources::CachyOS-kernels
+games-util/steam-launcher::steam-overlay
 #=sys-devel/gcc-16.0.9999
 #=sys-devel/gcc-16.0.9999::gentoo
 #=sys-devel/gcc-16.0.0.0_p25251214
