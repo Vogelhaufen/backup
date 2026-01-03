@@ -13,7 +13,7 @@ asdf=$(grep "Logitech G502 HERO Gaming Mouse" /tmp/evtestoutput | grep --invert-
 while true
 do
 
-idlecount=0
+idlecount=1
 idlefail=3
 
 idlecheck () {
