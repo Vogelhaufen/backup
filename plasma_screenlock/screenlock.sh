@@ -41,6 +41,8 @@ fi
 
 idlecheck
 
-echo $(date +%F_%T) >> /tmp/screenlock_executed && loginctl lock-session $(loginctl list-sessions | cut -c 1-8  | head -n 2 | grep --invert-match "SESSION" | tr -d ' ')
+# deprecated, apps like discord prevent plasma from turning off displays
+#echo $(date +%F_%T) >> /tmp/screenlock_executed && loginctl lock-session $(loginctl list-sessions | cut -c 1-8  | head -n 2 | grep --invert-match "SESSION" | tr -d ' ')
+echo $(date +%F_%T) >> /tmp/screenlock_executed && kscreen-doctor --dpms off
 
 done
