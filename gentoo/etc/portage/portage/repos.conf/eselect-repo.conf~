@@ -1,0 +1,7 @@
+# created by eselect-repo
+
+
+[pentoo]
+location = /var/db/repos/pentoo
+sync-type = git
+sync-uri = https://github.com/pentoo/pentoo-overlay.git

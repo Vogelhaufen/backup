@@ -1,0 +1,11 @@
+kde-plasma/* -kwallet thunderbolt rdp oxygen-theme
+kde-frameworks/* -kwallet thunderbolt rdp oxygen-theme
+kde-apps/* -kwallet thunderbolt rdp  oxygen-theme
+kde-misc/* -kwallet thunderbolt rdp oxygen-theme
+#kde-frameworks/kio -kwallet
+#kde-plasma/kde-cli-tools -kwallet
+#kde-plasma/kde-cli-tools-common -kwallet
+#kde-plasma/kdeconnect -kwallet
+#kde-plasma/systemsettings -kwallet
+#kde-apps/dolphin -kwallet
+#kde-plasma/plasma-meta -kwallet

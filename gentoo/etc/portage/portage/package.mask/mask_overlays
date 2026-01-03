@@ -1,0 +1,2 @@
+#mask overlays as security feature, stuff wanted = package.unmask
+*/*::CachyOS-kernels
