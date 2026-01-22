@@ -29,7 +29,4 @@ if [ "$enabled" -eq 1 ]; then
     grep -v '^GRUB_DEFAULT=' /etc/default/grub > /tmp/grub.tmp && echo 'GRUB_DEFAULT="'$(grep -i "Gentoo GNU/Linux, with" /boot/grub/grub.cfg | grep -i cachyos | head -n1 | cut -d'"' -f2)'"' >> /tmp/grub.tmp && mv /tmp/grub.tmp /etc/default/grub
 else
     echo "Build disabled (enabled=0), skipping make step"
-
-#  sh /usr/src/nvidia-postinstall/build-modules.sh
-
 fi
