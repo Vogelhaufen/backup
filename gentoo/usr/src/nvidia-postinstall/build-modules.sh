@@ -6,9 +6,8 @@ KERNEL_USE=${KERNEL_USE#linux-}                     # strip 'linux-' prefix
 echo $KERNEL_USE
 
 # static $KERNEL_USE
-# uncomment to use
 # overrides automatic detection since its topdown
-
+# uncomment to use:
 #KERNEL_USE=<kernel-name> #uname -r
 
 
