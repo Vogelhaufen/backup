@@ -48,8 +48,22 @@ echo "GRUB_DEFAULT=\"$TITLE\"" >> /etc/default/grub
 # Rebuild grub.cfg with new default
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Remove sources // takes up to 30GiB per source
-rm -rf /usr/src/linux-*-cachyos
+# Remove sources but current 
+cd /usr/src || { echo "Error: /usr/src not found"; exit 1; }
+
+current_kernel=$(readlink -f linux)
+echo "Current kernel source: $current_kernel"
+echo "Old sources to be deleted:"
+
+for dir in linux-*; do
+    fullpath=$(readlink -f "$dir")
+    if [ "$fullpath" != "$current_kernel" ]; then
+        echo "Deleting $dir"
+        sudo rm -rf "$dir"
+    fi
+done
+
+echo "Cleanup complete."
 
 else
     echo "Build disabled (enabled=0), skipping make step"
