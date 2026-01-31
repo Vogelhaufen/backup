@@ -48,6 +48,8 @@ echo "GRUB_DEFAULT=\"$TITLE\"" >> /etc/default/grub
 # Rebuild grub.cfg with new default
 grub-mkconfig -o /boot/grub/grub.cfg
 
+# Remove sources // takes up to 30GiB per source
+rm -rf /usr/src/linux-*-cachyos
 
 else
     echo "Build disabled (enabled=0), skipping make step"
