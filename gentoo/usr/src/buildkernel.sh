@@ -67,7 +67,7 @@ echo "Cleanup complete."
 
 else
     echo "Build disabled (enabled=0), skipping make step"
-
+# leftover from debugging
 #  sh /usr/src/nvidia-postinstall/build-modules.sh
 
 fi
