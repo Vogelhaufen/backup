@@ -1,6 +1,6 @@
 #!/bin/bash
 
-enabled=1   # set to 0 to skip make for debug
+enabled=1 
 
 if [ "$1" != "build" ]; then
     echo "Kernel selection verification step"
