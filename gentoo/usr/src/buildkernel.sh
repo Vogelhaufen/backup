@@ -48,7 +48,7 @@ echo "GRUB_DEFAULT=\"$TITLE\"" >> /etc/default/grub
 # Rebuild grub.cfg with new default
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Remove sources but current 
+# Remove sources but current, each source takes up to 30GiB ... 
 cd /usr/src || { echo "Error: /usr/src not found"; exit 1; }
 
 current_kernel=$(readlink -f linux)
