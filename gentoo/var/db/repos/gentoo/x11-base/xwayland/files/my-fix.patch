@@ -1,0 +1,166 @@
+diff --git a/hw/xwayland/meson.build b/hw/xwayland/meson.build
+index 469b61ad0..12fc3896d 100644
+--- a/hw/xwayland/meson.build
++++ b/hw/xwayland/meson.build
+@@ -52,6 +52,7 @@ tearing_xml = join_paths(protodir, 'staging', 'tearing-control', 'tearing-contro
+ fractional_scale_xml = join_paths(protodir, 'staging', 'fractional-scale', 'fractional-scale-v1.xml')
+ syncobj_xml = join_paths(protodir, 'staging', 'linux-drm-syncobj', 'linux-drm-syncobj-v1.xml')
+ system_bell_xml = join_paths(protodir, 'staging', 'xdg-system-bell', 'xdg-system-bell-v1.xml')
++warp_xml = join_paths(protodir, 'staging', 'pointer-warp', 'pointer-warp-v1.xml')
+ 
+ proto_xml = [
+     relative_xml,
+@@ -70,6 +71,7 @@ proto_xml = [
+     fractional_scale_xml,
+     syncobj_xml,
+     system_bell_xml,
++    warp_xml,
+ ]
+ 
+ client_header = generator(scanner,
+diff --git a/hw/xwayland/xwayland-input.c b/hw/xwayland/xwayland-input.c
+index 2ecf1026e..302d0e8e1 100644
+--- a/hw/xwayland/xwayland-input.c
++++ b/hw/xwayland/xwayland-input.c
+@@ -56,6 +56,7 @@
+ #include "xwayland-keyboard-grab-unstable-v1-client-protocol.h"
+ #include "keyboard-shortcuts-inhibit-unstable-v1-client-protocol.h"
+ #include "xdg-system-bell-v1-client-protocol.h"
++#include "pointer-warp-v1-client-protocol.h"
+ 
+ #define SCROLL_AXIS_HORIZ 2
+ #define SCROLL_AXIS_VERT 3
+@@ -3353,7 +3354,6 @@ xwl_pointer_warp_emulator_set_fake_pos(struct xwl_pointer_warp_emulator *warp_em
+         zwp_locked_pointer_v1_set_cursor_position_hint(locked_pointer,
+                                                        wl_fixed_from_int(sx),
+                                                        wl_fixed_from_int(sy));
+-        wl_surface_commit(focus_window->surface);
+     }
+ }
+ 
+@@ -3483,8 +3483,10 @@ xwl_pointer_warp_emulator_create(struct xwl_seat *xwl_seat)
+ static void
+ xwl_pointer_warp_emulator_destroy(struct xwl_pointer_warp_emulator *warp_emulator)
+ {
+-    if (warp_emulator->locked_pointer)
++    if (warp_emulator->locked_pointer) {
++        wl_surface_commit(warp_emulator->locked_window->surface);
+         zwp_locked_pointer_v1_destroy(warp_emulator->locked_pointer);
++    }
+     free(warp_emulator);
+ }
+ 
+@@ -3520,6 +3522,28 @@ xwl_seat_can_emulate_pointer_warp(struct xwl_seat *xwl_seat)
+     return TRUE;
+ }
+ 
++static void
++xwl_seat_warp_pointer(struct xwl_seat *xwl_seat, struct xwl_window *xwl_window, int x, int y)
++{
++    int sx, sy;
++    WindowPtr window = xwl_window->toplevel;
++    struct xwl_window *focus_window = xwl_seat->focus_window;
++
++    if (!focus_window)
++        return;
++
++    if (x >= window->drawable.x ||
++        y >= window->drawable.y ||
++        x < (window->drawable.x + window->drawable.width) ||
++        y < (window->drawable.y + window->drawable.height)) {
++        sx = round((double) (x - window->drawable.x) /
++                             focus_window->viewport_scale_x);
++        sy = round((double) (y - window->drawable.y) /
++                             focus_window->viewport_scale_y);
++        wp_pointer_warp_v1_warp_pointer(xwl_seat->xwl_screen->pointer_warp, xwl_window->surface, xwl_seat->wl_pointer, wl_fixed_from_int(sx), wl_fixed_from_int(sy), xwl_seat->pointer_enter_serial);
++    }
++}
++
+ void
+ xwl_seat_emulate_pointer_warp(struct xwl_seat *xwl_seat,
+                               struct xwl_window *xwl_window,
+@@ -3529,14 +3553,31 @@ xwl_seat_emulate_pointer_warp(struct xwl_seat *xwl_seat,
+     if (!xwl_seat_can_emulate_pointer_warp(xwl_seat))
+         return;
+ 
+-    if (xwl_seat->x_cursor != NULL)
++    if (xwl_seat->x_cursor != NULL) {
++        /* Use the pointer warp protocol if available */
++        if (xwl_seat->xwl_screen->pointer_warp) {
++            xwl_seat_warp_pointer(xwl_seat, xwl_window, x, y);
++        } else {
++            if (xwl_seat->confined_pointer)
++                xwl_seat_destroy_confined_pointer(xwl_seat);
++            struct xwl_pointer_warp_emulator emulator = { .xwl_seat = xwl_seat };
++            xwl_pointer_warp_emulator_warp(&emulator, xwl_window, sprite, x, y);
++            wl_surface_commit(emulator.xwl_seat->focus_window->surface);
++            if (emulator.locked_pointer)
++                zwp_locked_pointer_v1_destroy(emulator.locked_pointer);
++            if (xwl_seat->cursor_confinement_window) {
++                xwl_seat_confine_pointer(xwl_seat,
++                                        xwl_seat->cursor_confinement_window);
++            }
++        }
+         return;
++    }
+ 
+-    if (!xwl_seat->pointer_warp_emulator)
++    if (!xwl_seat->pointer_warp_emulator) {
+         xwl_seat_create_pointer_warp_emulator(xwl_seat);
+-
+-    if (!xwl_seat->pointer_warp_emulator)
+-        return;
++        if (!xwl_seat->pointer_warp_emulator)
++            return;
++    }
+ 
+     xwl_pointer_warp_emulator_warp(xwl_seat->pointer_warp_emulator,
+                                    xwl_window,
+diff --git a/hw/xwayland/xwayland-screen.c b/hw/xwayland/xwayland-screen.c
+index 44e4a8055..b6f6b3bc1 100644
+--- a/hw/xwayland/xwayland-screen.c
++++ b/hw/xwayland/xwayland-screen.c
+@@ -73,6 +73,7 @@
+ #include "xwayland-shell-v1-client-protocol.h"
+ #include "tearing-control-v1-client-protocol.h"
+ #include "fractional-scale-v1-client-protocol.h"
++#include "pointer-warp-v1-client-protocol.h"
+ 
+ static DevPrivateKeyRec xwl_screen_private_key;
+ static DevPrivateKeyRec xwl_client_private_key;
+@@ -551,6 +552,10 @@ registry_global(void *data, struct wl_registry *registry, uint32_t id,
+         xwl_screen->fractional_scale_manager =
+             wl_registry_bind(registry, id, &wp_fractional_scale_manager_v1_interface, 1);
+     }
++    else if (strcmp(interface, wp_pointer_warp_v1_interface.name) == 0) {
++        xwl_screen->pointer_warp =
++            wl_registry_bind(registry, id, &wp_pointer_warp_v1_interface, 1);
++    }
+ #ifdef XWL_HAS_GLAMOR
+     else if (xwl_screen->glamor) {
+         xwl_glamor_init_wl_registry(xwl_screen, registry, id, interface,
+diff --git a/hw/xwayland/xwayland-screen.h b/hw/xwayland/xwayland-screen.h
+index ffbaa09e7..414b35e81 100644
+--- a/hw/xwayland/xwayland-screen.h
++++ b/hw/xwayland/xwayland-screen.h
+@@ -119,6 +119,7 @@ struct xwl_screen {
+     struct wp_fractional_scale_manager_v1 *fractional_scale_manager;
+     struct wp_linux_drm_syncobj_manager_v1 *explicit_sync;
+     struct xdg_system_bell_v1 *system_bell;
++    struct wp_pointer_warp_v1 *pointer_warp;
+     struct xorg_list drm_lease_devices;
+     struct xorg_list queued_drm_lease_devices;
+     struct xorg_list drm_leases;
+diff --git a/meson.build b/meson.build
+index b76083269..9287e39cc 100644
+--- a/meson.build
++++ b/meson.build
+@@ -67,7 +67,7 @@ libselinux_req = '>= 2.0.86'
+ xext_req = '>= 1.0.99.4'
+ xproto_req = '>= 7.0.31'
+ wayland_req = '>= 1.21.0'
+-wayland_protocols_req = '>= 1.38'
++wayland_protocols_req = '>= 1.45'
+ gbm_req = '>= 10.2'
+ xf86dgaproto_req = '>= 2.0.99.1'
+ xshmfence_req = '>= 1.1'
